@@ -8,10 +8,7 @@
       let pkgs = nixpkgs.legacyPackages.${system};
       in {
         devShells.default = pkgs.mkShell {
-          packages = with pkgs;
-            [
-              (pkgs.callPackage ./default.nix { })
-            ];
+          packages = with pkgs; [ (pkgs.callPackage ./default.nix { }) ];
         };
       });
 }
