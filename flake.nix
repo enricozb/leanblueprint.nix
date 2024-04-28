@@ -5,10 +5,18 @@
 
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        leanblueprint = (pkgs.callPackage ./default.nix { });
       in {
-        devShells.default = pkgs.mkShell {
-          packages = with pkgs; [ (pkgs.callPackage ./default.nix { }) ];
+        devShells.default =
+          pkgs.mkShell { packages = with pkgs; [ leanblueprint ]; };
+
+        packages = {
+          default = leanblueprint;
+          leanblueprint = leanblueprint;
         };
-      });
+      }) // {
+        overlays.default = import ./overlay.nix;
+      };
 }
