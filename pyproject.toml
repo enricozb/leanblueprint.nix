@@ -1,0 +1,24 @@
+# consumed by nix
+
+[tool.poetry]
+name = "leanblueprint"
+version = "0.0.6"
+description = "Lean prover blueprint plasTeX plugin."
+authors = ["Patrick Massot"]
+
+[tool.poetry.dependencies]
+plasTeX = ">=3.1"
+plastexshowmore = ">=0.0.2"
+plastexdepgraph = ">=0.0.3"
+click = "*"
+rich = "*"
+rich-click = "*"
+Jinja2 = ">=3.1.0"
+GitPython = ">=3.1.28"
+
+[tool.poetry.scripts]
+leanblueprint = "leanblueprint.client:safe_cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
